@@ -1,11 +1,14 @@
 import React from 'react';
 import './Catalog.css';
-
+import ProductList from './ProductList'
 class Catalog extends React.Component {
     render() {
-        let title = "The Catalog of today " + new Date().toDateString();
-        return <div><h2>{title}</h2></div>;
-        }
-    }
+    let title = "Catalog";
 
+    return <div>
+        <h2>Catalog</h2>
+        <ProductList />
+    </div>;
+    }
+}
 export default Catalog;
