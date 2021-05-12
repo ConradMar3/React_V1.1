@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'; 
 import ReactLoading from 'react-loading';
-import { Media, Form, Button } from 'react-bootstrap';
+import { Media, Form, Button, Nav } from 'react-bootstrap';
 
 class GitHub extends Component {    
     
@@ -30,8 +30,7 @@ class GitHub extends Component {
                 this.setState({
                     isLoading : false, 
                     data: res.data.items                                  
-                })  
-                             
+                })
                 console.log(res.data.items); 
             });             
     }          
@@ -39,7 +38,7 @@ class GitHub extends Component {
     render() { 
         const listUsers = this.state.data.map(user =>             
             <Media key={user.id}>
-                <a href={user.html_url}>    
+                <Nav.Link href={`/github/user/${user.login}/${user.id}`}> 
                     <img
                         width={64}
                         height={64}
@@ -47,7 +46,7 @@ class GitHub extends Component {
                         src={user.avatar_url}
                         alt="Generic placeholder"
                     />
-                </a>
+                </Nav.Link>
                 <Media.Body>
                     <h5>Login: {user.login}</h5>
                     <p>Id: { user.id }</p>
@@ -56,7 +55,7 @@ class GitHub extends Component {
         );        
 
         return (
-          <div>
+            <div>
             <Form inline onSubmit={this.handleSubmit}>
                 <Form.Group controlId="formInlineName">                                    
                     <Form.Control 
@@ -77,7 +76,7 @@ class GitHub extends Component {
                 <ReactLoading type="spinningBubbles" color="#444" /> 
             }  
             {listUsers}                                                                                            
-          </div>
+            </div>
         );
     }
     
