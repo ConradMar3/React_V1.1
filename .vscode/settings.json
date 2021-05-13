@@ -1,0 +1,8 @@
+{
+    "chronicler.recording-defaults": {
+    
+        "flags": null,
+        "fps": 10,
+        "countdown": 5
+    }
+}

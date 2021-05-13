@@ -1,30 +1,46 @@
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, HelpBlock, Button, Alert } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
+import * as firebase from 'firebase';
 
 class UserForm extends Component {
 
   errorUsername;
-  errorPassword;
-  roles = ['Read', 'Write', 'Administrator'];    
+  errorEmail;   
+  title;
+  id;
 
   constructor(props){
-    super(props);
+    super(props); 
 
     this.errorUsername = '';
-    this.errorPassword = '';
+    this.errorEmail = '';   
+    this.id = this.props.match.params.id
+    this.title = 'New User';    
 
     this.state = {
-      username: '',
-      password: '',
-      usernameTouched: false,
-      passwordTouched: false,
-      errorLogin: false // put errorlogin as state because we want form to be re-rendered.
-    };  
-    
+        username: '',
+        email: '',
+        usernameTouched: false,
+        emailTouched: false,      
+    };         
+      
     this.handleChange = this.handleChange.bind(this);  
     this.handleBlur = this.handleBlur.bind(this);    
-    this.handleSubmit = this.handleSubmit.bind(this);    
+    this.handleSubmit = this.handleSubmit.bind(this);      
   } 
+
+  componentDidMount(){
+    if(this.id){        
+        this.title = 'Edit User';
+        firebase.database().ref('/' + this.id)
+        .on('value',snapshot => {            
+            this.setState({
+                username: snapshot.val().username,
+                email: snapshot.val().email,
+            });              
+          });        
+    }
+  }  
 
   getUserNameValidationState() {    
     const length = this.state.username.length;
@@ -49,13 +65,27 @@ class UserForm extends Component {
     }    
   }
 
-  getPasswordValidationState() {    
-    const length = this.state.password.length;
+  getEmailValidationState() {    
+    const length = this.state.email.length;
 
-    if(this.state.passwordTouched){
-      if(length < 3) return 'error'
-        else return 'success';      
-    }
+    if(this.state.emailTouched){
+        if (length === 0){
+          this.errorEmail = 'Email is required';        
+          return 'error';
+        } 
+        else if (length < 3){
+          this.errorEmail = 'Email should be minimum 3 characters';        
+          return 'error';
+        }  
+        else if(this.state.email.indexOf('@') === -1){        
+          this.errorEmail = 'Email should contain @';        
+          return 'error';             
+        }           
+        else {
+          this.errorEmail = '';                 
+          return 'success'
+        }       
+      } 
   }
 
   handleBlur(e){
@@ -78,103 +108,91 @@ class UserForm extends Component {
 
   handleSubmit(event) { 
     this.errorLogin = false; 
-    if (!this.canBeSubmitted()) {      
-      event.preventDefault();
+    event.preventDefault(); 
+    if (!this.canBeSubmitted()) {            
       return;
     }
-    else {     
-      if(!this.login(this.state.username,this.state.password)){  
-        this.setState({
-          errorLogin: true
-        });         
-        console.log("invalid login");             
-        event.preventDefault();        
-        return;
-      }                
-      // actual submit logic...    
-      this.setState({
-        errorLogin: false
-      });       
-      alert('name: ' + this.state.username + '\npassword: ' + this.state.password);      
+    else {                
+      // actual submit logic...         
+      if(this.id){
+        firebase.database().ref('/'+this.id).update({
+            username: this.state.username,	
+            email: this.state.email  
+          }).then(() => this.props.history.push("/"));                                                          
+      }
+      else{
+        firebase.database().ref('/').push({
+            username: this.state.username,	
+            email: this.state.email  
+          }).then(() => this.props.history.push("/"));                                
+      }       
     }          
-  }  
-
-  login(username, password){       
-    if(username === "jason" && password === "123")
-        return true; 
-    else
-        return false;
   }  
   
   canBeSubmitted() {    
     return (
-      this.state.usernameTouched && this.state.passwordTouched 
-        && this.errorUsername.length === 0 && this.errorPassword.length === 0      
+      this.state.usernameTouched && this.state.emailTouched 
+        && this.errorUsername.length === 0 && this.errorEmail.length === 0      
     );
   }  
 
   render() {    
-    const listRoles = this.roles.map((role) => 
-      <option value="select">{role}</option>
-    );    
     const isEnabled = this.canBeSubmitted();
 
     return (
-      <form onSubmit={this.handleSubmit}>
-        <FormGroup
-          controlId="formBasicText"
-          validationState={this.getUserNameValidationState()}
-        >
-          <ControlLabel>User Name</ControlLabel>
-          <FormControl
-            name="username"
-            type="text"
-            value={this.state.username}
-            placeholder="Enter Username"
-            onChange={this.handleChange}
-            onBlur={this.handleBlur}
-          />
-          <FormControl.Feedback />
-          { this.errorUsername.length > 0 && this.state.usernameTouched &&            
-            <HelpBlock>{this.errorUsername}</HelpBlock>
-          }                              
-        </FormGroup>
-        <FormGroup
-          controlId="formBasicText"
-          validationState={this.getPasswordValidationState()}
-        >
-          <ControlLabel>Password</ControlLabel>
-          <FormControl
-            name="password"
-            type="password"
-            value={this.state.password}
-            placeholder="Enter password"
-            onChange={this.handleChange}
-            onBlur={this.handleBlur}
-          />
-          <FormControl.Feedback />
-          <HelpBlock></HelpBlock>
-        </FormGroup>
-        <FormGroup controlId="formControlsSelect">
-            <ControlLabel>Select Role</ControlLabel>
-            <FormControl componentClass="select" placeholder="select" name="role">                              
-              <option value="select">select</option>
-              {listRoles}
-              <option value="other">...</option>
-            </FormControl>
-        </FormGroup>            
-        <Button type="submit" disabled={!isEnabled}>
-          Submit
-        </Button>    
-        { this.state.errorLogin &&             
-            <Alert bsStyle="danger">
-              <strong>Error</strong>Username or password is invalid.
-            </Alert>            
-        }                   
-      </form>
+      <div>
+        <h1>{this.title}</h1>
+        <form onSubmit={this.handleSubmit}>
+            <FormGroup
+            controlId="formBasicText"
+            validationState={this.getUserNameValidationState()}
+            >
+            <ControlLabel>User Name</ControlLabel>
+            <FormControl
+                name="username"
+                type="text"
+                value={this.state.username}
+                placeholder="Enter Username"
+                onChange={this.handleChange}
+                onBlur={this.handleBlur}
+            />
+            <FormControl.Feedback />
+            { this.errorUsername.length > 0 && this.state.usernameTouched &&            
+                <HelpBlock>{this.errorUsername}</HelpBlock>
+            }                              
+            </FormGroup>
+            <FormGroup
+            controlId="formBasicText"
+            validationState={this.getEmailValidationState()}
+            >
+            <ControlLabel>Email</ControlLabel>
+            <FormControl
+                name="email"
+                type="text"
+                value={this.state.email}
+                placeholder="Enter email"
+                onChange={this.handleChange}
+                onBlur={this.handleBlur}
+            />
+            <FormControl.Feedback />
+            { this.errorEmail.length > 0 && this.state.emailTouched &&            
+                <HelpBlock>{this.errorEmail}</HelpBlock>
+            }
+            </FormGroup>           
+            <Button type="submit" disabled={!isEnabled}>
+            Submit
+            </Button>                    
+        </form>
+      </div>
     );
   }
-
 }
 
 export default UserForm;
+
+/**
+ 
+ * 
+ * 
+   
+ */
