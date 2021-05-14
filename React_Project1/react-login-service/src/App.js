@@ -8,7 +8,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>FireBase intro (Chapter.9)</h1>
+        <h1>Firebase.API</h1>
+        <p>Chapter 9 - C.R.U.D. with Firebase.</p>
       </div>
     );
   }
