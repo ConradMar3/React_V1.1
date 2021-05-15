@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as reportWebVitals from './reportWebVitals';
-import * as firebase from 'firebase';
+import reportWebVitals from './reportWebVitals';
+import firebase from 'firebase/app';
 
 var config = {
   apiKey: "AIzaSyBN9WlmRc3SedmC4agM1G-rYqezGR22iZE",
