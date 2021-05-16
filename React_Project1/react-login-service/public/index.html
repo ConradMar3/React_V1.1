@@ -26,6 +26,10 @@
       integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"
+    />
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -40,26 +44,17 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
- <!-- The core Firebase JS SDK is always required and must be listed first -->
-    <script src="/__/firebase/8.6.1/firebase-app.js"></script>
-
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-     https://firebase.google.com/docs/web/setup#available-libraries -->
-    <script src="/__/firebase/8.6.1/firebase-analytics.js"></script>
-
-    <!-- Initialize Firebase -->
-    <script src="/__/firebase/init.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js">
+          // Initialize Firebase
+      var config = {
+      apiKey: "AIzaSyBN9WlmRc3SedmC4agM1G-rYqezGR22iZE",
+      authDomain: "crudproject-45834.firebaseapp.com",
+      databaseURL: "https://crudproject-45834.firebaseio.com",
+      storageBucket: "crudproject-45834.appspot.com",
+      messagingSenderId: "590481645308"
+      appId: “…”
+      };
+      firebase.initializeApp(config);
+    </script>
   </body>
 </html>
