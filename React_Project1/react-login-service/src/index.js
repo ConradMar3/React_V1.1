@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import serviceWorker from './registerServiceWorker';
-import firebase from '@firebase/app';
-import 'firebase/firestore';
+import * as firebase from 'firebase';
 
 
 var config = {
