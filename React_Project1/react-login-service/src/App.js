@@ -1,32 +1,54 @@
 import React, { Component } from 'react';
-import User from './User';
-import UserForm from './UserForm';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
+import GitHub from './GitHub';
+import GitHubUser from './GitHubUser';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { Nav, Navbar, NavItem } from 'react-bootstrap';
 class App extends Component {
-
   render() {
     return (
       <div>
-        <BrowserRouter>
-          <div>
-            <Switch>
-              <Route path="/edit/:id" component={UserForm} />
-              <Route path="/add" component={UserForm} />
-              <Route exact path="/" component={User} />
-              <Route path="/*" component={NotFound} />
-            </Switch>
-          </div>
-        </BrowserRouter>
+        <Header />
       </div>
     );
   }
 }
-
 export default App;
-
+class Header extends Component {
+  render() {
+    return (
+      <BrowserRouter>
+        <div>
+          <Navbar>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <a href="#">React-Bootstrap</a>
+              </Navbar.Brand>
+            </Navbar.Header>
+            <Nav>
+              <NavItem><Link to="/">Home</Link></NavItem>
+              <NavItem><Link to="/github">GitHub</Link></NavItem>
+            </Nav>
+          </Navbar>
+          <Switch>
+            <Route path="/github/user/:login/:score" component={GitHubUser} />
+            <Route path="/github" component={GitHub} />
+            <Route exact path="/" component={Home} />
+            <Route path="/*" component={NotFound} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    )
+  }
+}
+class Home extends Component {
+  render() {
+    return (
+      <div>
+        Home
+      </div>
+    )
+  }
+}
 class NotFound extends Component {
   render() {
     return <div>Not Found</div>

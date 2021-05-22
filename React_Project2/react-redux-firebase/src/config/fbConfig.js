@@ -1,20 +1,18 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import 'firebase/auth'
-
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-var config = {
-    apiKey: "AIzaSyBN9WlmRc3SedmC4agM1G-rYqezGR22iZE",
-    authDomain: "crudproject-45834.firebaseapp.com",
-    databaseURL: "https://crudproject-45834.firebaseio.com",
-    projectId: "crudproject-45834",
-    storageBucket: "crudproject-45834.appspot.com",
-    messagingSenderId: "590481645308",
-    appId: "1:590481645308:web:613e62539967b876"
+const firebaseConfig = {
+    apiKey: "AIzaSyAM8z5VzHuPDpoMEeX47PBR5uw0M8akEXE",
+    authDomain: "crudproject-e74d8.firebaseapp.com",
+    databaseURL: "https://crudproject-e74d8-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "crudproject-e74d8",
+    storageBucket: "crudproject-e74d8.appspot.com",
+    messagingSenderId: "926774949203",
+    appId: "1:926774949203:web:230abc015bde1d9379dda6",
+    measurementId: "G-EKWRV4NYC4"
 };
 
-firebase.initializeApp(config);
-firebase.firestore().settings({ timestampInSnapshots: true });
+firebase.initializeApp(firebaseConfig);
 
 export default firebase;
