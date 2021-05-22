@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from 'firebase/app';
 import 'firebase/database';
-import { Table } from 'react-bootstrap'
+import { Table, Button } from 'react-bootstrap'
 
 
 class User extends Component {
@@ -10,6 +10,7 @@ class User extends Component {
         this.state = {
             users: []
         };
+        this.add = this.add.bind(this);
     }
     componentDidMount() {
         firebase.database().ref('/')
@@ -25,6 +26,11 @@ class User extends Component {
                 })
             });
     }
+
+    add(e) {
+        this.props.history.push("/add");
+    }
+
     render() {
         const listUsers = this.state.users.map((user) =>
             <tr key={user.key}>
@@ -36,6 +42,7 @@ class User extends Component {
         );
         return (
             <div>
+                <Button variant="primary" onClick={this.add}>Add</Button>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
