@@ -1,18 +1,20 @@
-import firebase from 'firebase/app'
-import 'firebase/firestore'
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/database'
 
+// Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-    apiKey: "AIzaSyAM8z5VzHuPDpoMEeX47PBR5uw0M8akEXE",
-    authDomain: "crudproject-e74d8.firebaseapp.com",
-    databaseURL: "https://crudproject-e74d8-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "crudproject-e74d8",
-    storageBucket: "crudproject-e74d8.appspot.com",
-    messagingSenderId: "926774949203",
-    appId: "1:926774949203:web:230abc015bde1d9379dda6",
-    measurementId: "G-EKWRV4NYC4"
+var firebaseConfig = {
+    apiKey: "AIzaSyDndchZsYMM24kMRK8IrMYrIRn8nsgMx70",
+    authDomain: "react-redux-firebase-9698b.firebaseapp.com",
+    projectId: "react-redux-firebase-9698b",
+    storageBucket: "react-redux-firebase-9698b.appspot.com",
+    messagingSenderId: "553235523641",
+    appId: "1:553235523641:web:50706fa71078819258c5e8",
+    measurementId: "G-QP03MD71ZX"
 };
-
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+firebase.analytics();
 
-export default firebase;
+export default firebaseConfig;
