@@ -7,7 +7,7 @@ const Navbar = () => {
     return (
         <nav className="nav-wrapper grey darken-3">
             <div className="container">
-                <Link to='/' className="brand-logo">Project2 - React/Redux.</Link>
+                <Link to='/' className="brand-logo">React/Redux/Firebase</Link>
                 <SignedInLinks />
                 <SignedOutLinks />
             </div>
