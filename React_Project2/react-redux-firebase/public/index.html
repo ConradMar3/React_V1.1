@@ -53,29 +53,13 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
         <!-- The core Firebase JS SDK is always required and must be listed first -->
-        <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+        <script src="/__/firebase/8.6.2/firebase-app.js"></script>
 
         <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
-        <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+        <script src="/__/firebase/8.6.2/firebase-analytics.js"></script>
 
-        <script>
-            // Your web app's Firebase configuration
-            // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-            var firebaseConfig = {
-                apiKey: "AIzaSyDndchZsYMM24kMRK8IrMYrIRn8nsgMx70",
-                authDomain: "react-redux-firebase-9698b.firebaseapp.com",
-                databaseURL:
-                    "https://react-redux-firebase-9698b-default-rtdb.firebaseio.com",
-                projectId: "react-redux-firebase-9698b",
-                storageBucket: "react-redux-firebase-9698b.appspot.com",
-                messagingSenderId: "553235523641",
-                appId: "1:553235523641:web:50706fa71078819258c5e8",
-                measurementId: "G-QP03MD71ZX",
-            };
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-            firebase.analytics();
-        </script>
+        <!-- Initialize Firebase -->
+        <script src="/__/firebase/init.js"></script>
     </body>
 </html>

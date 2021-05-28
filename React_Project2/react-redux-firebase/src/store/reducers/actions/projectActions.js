@@ -3,7 +3,7 @@ export const createProject = (project) => {
         // make async call to DB
         const firestore = getFirestore();
         firestore.collection('Project 2 - React.Redux.Firebase').add({
-            ...project, 
+            ...project,
             authorFirstName: 'Net',
             authorLastName: 'Ninja',
             authorId: 12345,
