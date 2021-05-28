@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import firebase from '@firebase/app';
+import firebase from 'firebase/app';
+import 'firebase/database';
 import { Table, Button, Modal } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 class User extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -12,6 +12,7 @@ class User extends Component {
             showDeleteDialog: false,
             selectedUser: {}
         };
+
         this.add = this.add.bind(this);
         this.closeDeleteDialog = this.closeDeleteDialog.bind(this);
         this.delete = this.delete.bind(this);
@@ -26,12 +27,12 @@ class User extends Component {
                 user['key'] = data.key;
                 returnArr.push(user);
             });
+
             this.setState({
                 users: returnArr
             })
         });
     }
-
     add(e) {
         this.props.history.push("/add");
     }
@@ -54,8 +55,6 @@ class User extends Component {
                 console.log("ERROR", error)
             });
     }
-
-
     closeDeleteDialog() {
         this.setState({
             showDeleteDialog: false,
@@ -72,7 +71,7 @@ class User extends Component {
                 <td>
                     <Link to={`/edit/${user.key}`}>
                         Edit
-          </Link>
+                    </Link>
                 </td>
                 <td><Button onClick={this.openDeleteDialog.bind(this, user)}>Remove</Button></td>
             </tr>

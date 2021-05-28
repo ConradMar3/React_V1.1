@@ -2,49 +2,32 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import serviceWorker from './registerServiceWorker';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
+import reportWebVitals from './reportWebVitals';
+import firebase from 'firebase/app'
 
-
-var config = {
-  apiKey: "AIzaSyBN9WlmRc3SedmC4agM1G-rYqezGR22iZE",
-  authDomain: "crudproject-45834.firebaseapp.com",
-  databaseURL: "https://crudproject-45834.firebaseio.com",
-  projectId: "crudproject-45834",
-  storageBucket: "crudproject-45834.appspot.com",
-  messagingSenderId: "590481645308",
-  appId: "1:590481645308:web:613e62539967b876"
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDndchZsYMM24kMRK8IrMYrIRn8nsgMx70",
+  authDomain: "react-redux-firebase-9698b.firebaseapp.com",
+  databaseURL: "https://react-redux-firebase-9698b-default-rtdb.firebaseio.com",
+  projectId: "react-redux-firebase-9698b",
+  storageBucket: "react-redux-firebase-9698b.appspot.com",
+  messagingSenderId: "553235523641",
+  appId: "1:553235523641:web:d9df4b18d97ce7ec58c5e8",
+  measurementId: "G-Y4373B2858"
 };
 
-firebase.initializeApp(config);
-ReactDOM.render(<App />, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker();
-
-/*  import React from 'react';
-    import ReactDOM from 'react-dom';
-    import './index.css';
-    import App from './App';
-    import reportWebVitals from './reportWebVitals';
-
-    ReactDOM.render(
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>,
-      document.getElementById('root')
-    );
+firebase.initializeApp(firebaseConfig);
 
 
-    if (module.hot) {
-      module.hot.accept();
-    }
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
 
-    // If you want to start measuring performance in your app, pass a function
-    // to log results (for example: reportWebVitals(console.log))
-    // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-    reportWebVitals();
-*/
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();

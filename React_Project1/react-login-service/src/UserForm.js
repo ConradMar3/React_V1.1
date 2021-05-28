@@ -40,7 +40,11 @@ class UserForm extends Component {
         <h1>{this.title}</h1>
         <Formik
           enableReinitialize={true}
-          initialValues={{ username: this.state.username, email: this.state.email }}
+          initialValues={{
+            username: this.state.username,
+            email: this.state.email
+          }}
+
           validate={values => {
             let errors = {};
             if (!values.email) {
