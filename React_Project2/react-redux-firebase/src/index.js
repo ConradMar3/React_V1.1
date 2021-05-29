@@ -10,9 +10,11 @@ import 'firebase/database';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './store/reducers/rootReducer';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk'
+import thunk from 'redux-thunk';
+import { getFirestore } from 'redux-firestore';
+import { getFirebase } from 'react-redux-firebase'
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })));
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -28,8 +30,8 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-// firebase.firestore().settings({ timestampsInSnapshots: true });
-firebase.analytics();
+firebase.firestore().settings({ timestampsInSnapshots: true });
+// firebase.analytics();
 
 ReactDOM.render(
   <React.StrictMode>
