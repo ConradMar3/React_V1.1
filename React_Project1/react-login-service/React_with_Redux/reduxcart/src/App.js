@@ -28,7 +28,7 @@ function mapDispatchToProps(dispatch) {
 var connectedComponent = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Cart);
-
+)
+    (Cart);
 
 export default connectedComponent;
