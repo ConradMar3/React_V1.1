@@ -7,6 +7,7 @@ function cartReducer(state, action) {
             productCart: []
         };
     }
+
     switch (action.type) {
         case "addProduct":
             return {

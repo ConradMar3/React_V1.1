@@ -1,5 +1,5 @@
-import { connect } from "react-redux";
-import Cart from "./Cart";
+import { connect } from 'react-redux';
+import Cart from './Cart';
 
 
 function mapStateToProps(state) {
